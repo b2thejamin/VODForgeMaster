@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Streamers - VODForge Master{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h3>Add New Streamer</h3>
+    <form method="POST" action="{{ url_for('add_streamer') }}">
+        <div class="form-group">
+            <label for="handle">Twitch Username</label>
+            <input type="text" id="handle" name="handle" placeholder="Enter Twitch username (e.g., shroud)" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Streamer</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Managed Streamers</h3>
+    
+    {% if streamers %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Twitch User ID</th>
+                    <th>Added</th>
+                    <th>Last Checked</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for streamer in streamers %}
+                <tr>
+                    <td><strong>{{ streamer.handle }}</strong></td>
+                    <td>{{ streamer.twitch_user_id or 'Pending...' }}</td>
+                    <td>{{ streamer.added_at }}</td>
+                    <td>{{ streamer.last_checked or 'Not yet checked' }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete_streamer', streamer_id=streamer.id) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this streamer?');">
+                            <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            <h3>No Streamers Yet</h3>
+            <p>Add your first Twitch streamer to start tracking their VODs.</p>
+        </div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>ℹ️ How It Works</h3>
+    <ul style="line-height: 2; color: #495057;">
+        <li>Add Twitch streamers by their username</li>
+        <li>The system polls Twitch API every <strong>120 seconds</strong> for new VODs</li>
+        <li>VODs are automatically detected and their end times are calculated</li>
+        <li>View all VODs on the Dashboard with "time since ended" information</li>
+        <li>Mark VODs as "New", "In Progress", or "Clipped"</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>⚙️ Configuration</h3>
+    <p style="color: #495057; line-height: 1.8;">
+        To use this application, you need to set up Twitch API credentials:
+    </p>
+    <ol style="line-height: 2; color: #495057; margin-left: 20px;">
+        <li>Go to <a href="https://dev.twitch.tv/console/apps" target="_blank" style="color: #667eea;">Twitch Developer Console</a></li>
+        <li>Create a new application</li>
+        <li>Copy your Client ID and Client Secret</li>
+        <li>Create a <code>.env</code> file based on <code>.env.example</code></li>
+        <li>Add your credentials to the <code>.env</code> file</li>
+        <li>Restart the application</li>
+    </ol>
+</div>
+{% endblock %}
