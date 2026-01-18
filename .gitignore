@@ -23,6 +23,9 @@ wheels/
 .installed.cfg
 *.egg
 
+# Environment
+.env
+
 # Database
 *.db
 *.sqlite
