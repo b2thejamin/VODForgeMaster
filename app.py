@@ -40,7 +40,7 @@ def format_time_since(ended_at_str):
             return f"{hours}h {minutes}m ago"
         else:
             return f"{minutes}m ago"
-    except:
+    except Exception:
         return "Unknown"
 
 def format_duration(seconds):
@@ -103,8 +103,10 @@ def datetimeformat(value):
     try:
         dt = datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
         return dt.strftime('%Y-%m-%d %I:%M %p')
-    except:
+    except Exception:
         return value
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Debug mode is enabled for local development only
+    # For production, use a WSGI server like gunicorn: gunicorn -w 4 app:app
+    app.run(debug=True, host='127.0.0.1', port=5000)

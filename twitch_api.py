@@ -1,6 +1,6 @@
 import requests
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -92,7 +92,6 @@ class TwitchAPI:
                 created_at = datetime.fromisoformat(video['created_at'].replace('Z', '+00:00'))
                 
                 # Calculate ended_at based on created_at + duration
-                from datetime import timedelta
                 ended_at = created_at + timedelta(seconds=duration_seconds)
                 
                 vods.append({
@@ -118,13 +117,16 @@ class TwitchAPI:
             if char.isdigit():
                 current_num += char
             elif char == 'h':
-                total_seconds += int(current_num) * 3600
+                if current_num:
+                    total_seconds += int(current_num) * 3600
                 current_num = ''
             elif char == 'm':
-                total_seconds += int(current_num) * 60
+                if current_num:
+                    total_seconds += int(current_num) * 60
                 current_num = ''
             elif char == 's':
-                total_seconds += int(current_num)
+                if current_num:
+                    total_seconds += int(current_num)
                 current_num = ''
         
         return total_seconds

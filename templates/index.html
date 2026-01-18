@@ -323,7 +323,7 @@
             const nextIndex = (currentIndex + 1) % statuses.length;
             const nextStatus = statuses[nextIndex];
             
-            fetch(`/update_status/${vodId}/${nextStatus}`, {
+            fetch('/update_status/' + encodeURIComponent(vodId) + '/' + encodeURIComponent(nextStatus), {
                 method: 'POST'
             }).then(() => {
                 location.reload();
