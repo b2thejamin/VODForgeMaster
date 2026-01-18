@@ -8,7 +8,7 @@ class Config:
     
     # Flask
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY', 'dev-secret-key-change-in-production')
-    DEBUG = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
+    DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
     
     # Database
     DATABASE_PATH = 'vodforge.db'

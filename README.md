@@ -57,8 +57,10 @@ A Python 3.11 Flask application for tracking Twitch VODs (Video On Demand) on yo
    TWITCH_CLIENT_ID=your_client_id_here
    TWITCH_CLIENT_SECRET=your_client_secret_here
    FLASK_SECRET_KEY=your_random_secret_key_here
-   FLASK_DEBUG=True
+   FLASK_DEBUG=False
    ```
+   
+   ⚠️ **Security Note**: Set `FLASK_DEBUG=False` in production to prevent security vulnerabilities.
 
 ## Usage
 

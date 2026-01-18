@@ -28,6 +28,10 @@ wheels/
 *.sqlite
 *.sqlite3
 
+# Test and demo files
+test_app.py
+add_sample_data.py
+
 # Environment
 .env
 .env.local
