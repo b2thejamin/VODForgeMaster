@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - VODForge Master{% endblock %}
+
+{% block content %}
+<div class="stats">
+    <div class="stat-card">
+        <h4>Total Streamers</h4>
+        <div class="value">{{ streamers|length }}</div>
+    </div>
+    <div class="stat-card">
+        <h4>Total VODs</h4>
+        <div class="value">{{ vods|length }}</div>
+    </div>
+    <div class="stat-card">
+        <h4>New VODs</h4>
+        <div class="value">{{ vods|selectattr('status', 'equalto', 'new')|list|length }}</div>
+    </div>
+    <div class="stat-card">
+        <h4>In Progress</h4>
+        <div class="value">{{ vods|selectattr('status', 'equalto', 'in_progress')|list|length }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Recent VODs</h3>
+    
+    {% if vods %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Streamer</th>
+                    <th>Title</th>
+                    <th>Duration</th>
+                    <th>Ended</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vod in vods %}
+                <tr>
+                    <td><strong>{{ vod.streamer_handle }}</strong></td>
+                    <td>
+                        <a href="{{ vod.url }}" target="_blank" style="color: #667eea; text-decoration: none;">
+                            {{ vod.title }}
+                        </a>
+                    </td>
+                    <td>{{ vod.duration }}</td>
+                    <td>{{ vod.time_since }}</td>
+                    <td>
+                        <span class="status-badge status-{{ vod.status }}">
+                            {{ vod.status.replace('_', ' ').title() }}
+                        </span>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ url_for('update_vod_status', vod_id=vod.id) }}" style="display: inline;">
+                            <select name="status" onchange="this.form.submit()" style="padding: 5px; border-radius: 4px; border: 1px solid #ced4da;">
+                                <option value="">Change Status</option>
+                                <option value="new" {% if vod.status == 'new' %}selected{% endif %}>New</option>
+                                <option value="in_progress" {% if vod.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                                <option value="clipped" {% if vod.status == 'clipped' %}selected{% endif %}>Clipped</option>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            <h3>No VODs Yet</h3>
+            <p>Add streamers to start tracking their VODs. The system polls Twitch every 120 seconds.</p>
+            <a href="{{ url_for('streamers') }}" class="btn btn-primary" style="margin-top: 20px;">Add Streamers</a>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    // Auto-refresh the page every 60 seconds to show updated "time since"
+    setTimeout(function() {
+        location.reload();
+    }, 60000);
+</script>
+{% endblock %}
