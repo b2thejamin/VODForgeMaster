@@ -54,9 +54,9 @@ A Python 3.11 Flask application for tracking Twitch VODs (Video On Demand) on yo
    
    Edit `.env` and add your credentials:
    ```
-   TWITCH_CLIENT_ID=your_client_id_here
-   TWITCH_CLIENT_SECRET=your_client_secret_here
-   FLASK_SECRET_KEY=your_random_secret_key_here
+   TWITCH_CLIENT_ID=ll0ik0lf11ftympsxq0al1rguhkz4s
+   TWITCH_CLIENT_SECRET=hi5j7quhxy4qoh1p8h3jlkkbcuyfit
+   FLASK_SECRET_KEY=f6c181074807ed4c85b1ce634b9c1f0c3d8b7fbaad876db2a9270c64557efdd4
    FLASK_DEBUG=False
    ```
    
