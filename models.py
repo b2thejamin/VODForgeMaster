@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 from config import Config
 
 class Database:
@@ -192,3 +192,28 @@ class VODModel:
         result = cursor.fetchone()
         conn.close()
         return result is not None
+
+    def delete_old_vods(self, days=7):
+        """Delete VODs older than specified days"""
+        conn = self.db.get_connection()
+        cursor = conn.cursor()
+
+        cutoff_date = datetime.utcnow() - timedelta(days=days)
+        cutoff_str = cutoff_date.strftime('%Y-%m-%d %H:%M:%S')
+
+        cursor.execute(
+            '''SELECT v.id, v.title, s.handle 
+               FROM vods v 
+               JOIN streamers s ON v.streamer_id = s.id 
+               WHERE v.ended_at < ?''',
+            (cutoff_str,)
+        )
+        vods_to_delete = cursor.fetchall()
+
+        cursor.execute('DELETE FROM vods WHERE ended_at < ?', (cutoff_str,))
+        delete_count = cursor.rowcount
+
+        conn.commit()
+        conn.close()
+
+        return delete_count, vods_to_delete

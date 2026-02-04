@@ -19,3 +19,4 @@ class Config:
     
     # Worker
     POLL_INTERVAL = 120  # seconds
+    VOD_RETENTION_DAYS = 7

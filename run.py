@@ -4,6 +4,10 @@ VODForge Master - Main entry point
 Run this script to start the Flask app and background worker
 """
 
+#Add vod deletion after 1 week
+#Change style to vodforge colors
+#make it so there is a desktop app that you can click to launch the app
+
 from app import start_app
 from config import Config
 

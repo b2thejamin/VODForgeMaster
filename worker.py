@@ -38,6 +38,7 @@ class VODWorker:
         while self.running:
             try:
                 self.poll_streamers()
+                self.cleanup_old_vods()
             except Exception as e:
                 print(f"Error in worker: {e}")
             
@@ -110,3 +111,16 @@ class VODWorker:
         
         # Update last checked timestamp
         self.streamer_model.update_last_checked(streamer['id'])
+
+    def cleanup_old_vods(self):
+        """Delete VODs older than retention period"""
+        try:
+            deleted_count, deleted_vods = self.vod_model.delete_old_vods(Config.VOD_RETENTION_DAYS)
+            
+            if deleted_count > 0:
+                print(f"[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}] Cleaned up {deleted_count} VOD(s) older than {Config.VOD_RETENTION_DAYS} days")
+                for vod in deleted_vods:
+                    print(f"  → Deleted: {vod['handle']} - {vod['title'][:50]}...")
+        except Exception as e:
+            print(f"Error cleaning up old VODs: {e}")
+
