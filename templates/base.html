@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #c62828 0%, #d84315 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,14 +21,14 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: #2b2b2b;
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
         
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #c62828 0%, #d84315 100%);
             color: white;
             padding: 30px;
         }
@@ -44,9 +44,9 @@
         }
         
         .nav {
-            background: #f8f9fa;
+            background: #1f1f1f;
             padding: 0;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid #3a3a3a;
         }
         
         .nav ul {
@@ -59,19 +59,20 @@
             display: block;
             padding: 15px 30px;
             text-decoration: none;
-            color: #495057;
+            color: #e0e0e0;
             font-weight: 600;
             transition: all 0.3s;
         }
         
         .nav li a:hover,
         .nav li a.active {
-            background: #667eea;
+            background: #c62828;
             color: white;
         }
         
         .content {
             padding: 30px;
+            color: #e0e0e0;
         }
         
         .flash-messages {
@@ -86,15 +87,15 @@
         }
         
         .flash.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: #1b5e20;
+            color: #a5d6a7;
+            border: 1px solid #2e7d32;
         }
         
         .flash.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background: #b71c1c;
+            color: #ef9a9a;
+            border: 1px solid #c62828;
         }
         
         .btn {
@@ -110,21 +111,21 @@
         }
         
         .btn-primary {
-            background: #667eea;
+            background: #c62828;
             color: white;
         }
         
         .btn-primary:hover {
-            background: #5568d3;
+            background: #b71c1c;
         }
         
         .btn-danger {
-            background: #dc3545;
+            background: #d84315;
             color: white;
         }
         
         .btn-danger:hover {
-            background: #c82333;
+            background: #bf360c;
         }
         
         .btn-small {
@@ -141,17 +142,18 @@
         th, td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid #3a3a3a;
+            color: #e0e0e0;
         }
         
         th {
-            background: #f8f9fa;
+            background: #1f1f1f;
             font-weight: 600;
-            color: #495057;
+            color: #ffffff;
         }
         
         tr:hover {
-            background: #f8f9fa;
+            background: #353535;
         }
         
         .status-badge {
@@ -163,18 +165,18 @@
         }
         
         .status-new {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: #ff6f00;
+            color: white;
         }
         
         .status-in_progress {
-            background: #fff3cd;
-            color: #856404;
+            background: #ffa726;
+            color: white;
         }
         
         .status-clipped {
-            background: #d4edda;
-            color: #155724;
+            background: #66bb6a;
+            color: white;
         }
         
         .form-group {
@@ -185,36 +187,38 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #495057;
+            color: #ffffff;
         }
         
         .form-group input,
         .form-group select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ced4da;
+            border: 1px solid #3a3a3a;
             border-radius: 6px;
             font-size: 1em;
+            background: #1f1f1f;
+            color: #e0e0e0;
         }
         
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #c62828;
+            box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.3);
         }
         
         .card {
-            background: white;
+            background: #353535;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid #e9ecef;
+            border: 1px solid #3a3a3a;
         }
         
         .card h3 {
             margin-bottom: 15px;
-            color: #495057;
+            color: #ffffff;
         }
         
         .stats {
@@ -225,11 +229,11 @@
         }
         
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #c62828 0%, #d84315 100%);
             color: white;
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
         
         .stat-card h4 {
@@ -246,7 +250,7 @@
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            color: #6c757d;
+            color: #999999;
         }
         
         .empty-state svg {
@@ -258,6 +262,20 @@
         
         .empty-state h3 {
             margin-bottom: 10px;
+            color: #b0b0b0;
+        }
+        
+        .empty-state p {
+            color: #888888;
+        }
+        
+        /* Links in content */
+        a {
+            color: #ff6f00;
+        }
+        
+        a:hover {
+            color: #ff8f00;
         }
     </style>
 </head>
